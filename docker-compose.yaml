@@ -1,0 +1,11 @@
+services:
+  web:
+    image: newshub_image
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: newshub-application
+    ports:
+      - "3000:3000"
+    env_file:
+      - ".env.local"

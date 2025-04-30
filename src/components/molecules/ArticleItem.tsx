@@ -20,7 +20,7 @@ const ArticleItem: React.FC<ArticleItemProps> = ({ article }) => {
       </div>
 
       <div className="flex flex-col justify-between lg:w-[60%] lg:justify-around">
-        <div className="flex flex-row items-center justify-between lg:gap-1">
+        <div className="flex flex-row items-center gap-3">
           <div className="flex flex-row items-center gap-2">
             <Logo />
             <div>{article.source.name}</div>
@@ -35,15 +35,17 @@ const ArticleItem: React.FC<ArticleItemProps> = ({ article }) => {
         </div>
 
         <p className="text-2xl font-semibold lg:text-sm">
-          <a className="hover:underline" href={article.url} target="blank">
+          <a
+            className="leading-snug hover:text-indigo-500"
+            href={article.url}
+            target="blank"
+          >
             {article.title}
           </a>
         </p>
 
         <div className="flex flex-row items-center gap-[1rem]">
-          <p className="font-bold">{article.author}</p>
-          <Point />
-          <p> 2 min read</p>
+          <p className="font-bold text-gray-500">{article.author}</p>
         </div>
       </div>
     </div>

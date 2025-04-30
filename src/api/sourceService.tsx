@@ -5,7 +5,7 @@ import apiClient from "./apiClient";
 export const getSources = async (): Promise<SourceResponse | undefined> => {
   try {
     const response = await apiClient.get(
-      `/top-headlines/sources?apiKey=${config.NEWSAPIKEY}`,
+      `https://newsapi.org/v2/top-headlines/sources?apiKey=${config.NEWSAPIKEY}`,
     );
     if (response.data.status === "ok") {
       return response.data;

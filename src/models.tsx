@@ -16,6 +16,7 @@ export enum StatusType {
 export type SourceResponse = {
   status: StatusType;
   sources: Source[];
+  totalResults: number;
 };
 
 export type Article = {
@@ -33,4 +34,21 @@ export type ArticleResponse = {
   status: StatusType;
   totalResults: number;
   articles: Article[] | [];
+};
+
+export type Params = {
+  page?: number;
+  pageSize?: number;
+  sources?: string;
+  from?: Date;
+  to?: Date;
+  query?: string;
+  language?: string;
+  sortBy?: string;
+  category?: string;
+};
+
+export type NavbarProps = {
+  categories: string[];
+  onCategoryChange: React.Dispatch<React.SetStateAction<string>>;
 };
