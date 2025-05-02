@@ -1,19 +1,27 @@
-import useCategories from "../../hooks/useCategories";
 import Navbar from "../organisms/NavBar/Navbar";
 
 import ImageBg from "../atoms/ImageBg";
 import TopArticle from "../molecules/TopArticle";
 import Articles from "../molecules/Articles";
 import useTopHeadLines from "../../hooks/useTopHeadLines";
-import config from "../../../config";
+import { Params } from "../../models";
+import useCategoriesAndSources from "../../hooks/useCategoriesAndSources";
+import { useState } from "react";
+import Footer from "../organisms/Footer/Footer";
+import Copyright from "../organisms/Copyright";
 
 const Home = () => {
-  const { categories } = useCategories();
+  const { categories } = useCategoriesAndSources();
+  const [category, setCategory] = useState<string>("general");
 
-  const url = `/top-headlines/?category=sports&pageSize=5&page=1&apiKey=${config.NEWSAPIKEY}`;
-  const { articles, isLoading } = useTopHeadLines(url);
+  console.log("selected category", category);
 
-  console.log("cat", categories);
+  const params: Params = {
+    page: 1,
+    pageSize: 5,
+    category: "general",
+  };
+  const { articles, isLoading } = useTopHeadLines(params);
 
   if (isLoading) {
     return (
@@ -22,14 +30,12 @@ const Home = () => {
       </div>
     );
   }
-  console.log("articles", articles);
-
   return (
     <>
       <div className="flex flex-col gap-[3rem]">
-        <Navbar categories={categories} />
+        <Navbar categories={categories} onCategoryChange={setCategory} />
 
-        <div className="mt-20 w-full lg:flex lg:h-[40rem] lg:flex-row">
+        <div className="mt-30 w-full lg:flex lg:h-[40rem] lg:flex-row">
           <div className="relative flex w-full flex-col md:flex-row lg:w-[70%] lg:flex-row lg:justify-end">
             <ImageBg article={articles[0]} />
             <TopArticle article={articles[0]} />
@@ -38,6 +44,13 @@ const Home = () => {
             <Articles articles={articles.slice(1)} />
           </div>
         </div>
+      </div>
+      <div className="mt-20 flex w-full bg-[#f6f6f6]">
+        <Footer />
+      </div>
+
+      <div className="w-full bg-[#f6f6f6]">
+        <Copyright />
       </div>
     </>
   );

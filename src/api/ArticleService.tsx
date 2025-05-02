@@ -1,7 +1,7 @@
 import { ArticleResponse } from "../models";
 import apiClient from "./apiClient";
 
-export const getTopHeadLines = async (
+export const getArticles = async (
   url: string,
 ): Promise<ArticleResponse | undefined> => {
   try {

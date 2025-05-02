@@ -1,7 +1,8 @@
 import { Search, User, AlignJustify } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
+import { NavbarProps } from "../../../models";
 
-const Navbar = ({ categories }: { categories: string[] }) => {
+const Navbar: React.FC<NavbarProps> = ({ categories, onCategoryChange }) => {
   const [isCategoriesVisible, setIsCategoriesVisible] = useState(false);
 
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
@@ -30,7 +31,10 @@ const Navbar = ({ categories }: { categories: string[] }) => {
               <li
                 key={cat}
                 className={`pl-2 transition-colors duration-300 ${activeCategory === index ? "text-[#d85a5c]" : "text-white"}`}
-                onClick={() => setActiveCategory(index)}
+                onClick={() => {
+                  setActiveCategory(index);
+                  onCategoryChange(cat);
+                }}
               >
                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
               </li>
